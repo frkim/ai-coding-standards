@@ -42,6 +42,7 @@ src/            application code
 tests/          unit, integration, and end-to-end tests
 infra/          Bicep infrastructure as code
 docs/adr/       architecture decision records
+tmp/scripts/    throwaway agent/developer scripts (git-ignored)
 ```
 
 ## Standards to follow
@@ -59,6 +60,12 @@ docs/adr/       architecture decision records
 - Every data table supports **sorting and filtering on column headers**, **pagination** for large data sets, and a
   **global search box** across the relevant columns.
 - Validate all input; paginate every collection endpoint.
+- Before adding a library, SDK, or runtime, **research its current stable version online** and integrate that
+  version (for example the latest Microsoft Foundry SDK and API version).
+- Prefer the **smallest Azure SKU** that meets the requirement; scale up only when a measured limit forces it.
+- Diagrams are [Mermaid](https://mermaid.js.org/), interactive visualisations use [D3.js](https://d3js.org/),
+  and presentations are [Marp](https://marp.app/) Markdown.
+- Throwaway implementation or troubleshooting scripts go in the git-ignored `tmp/scripts/` folder.
 - **When you implement a feature, test it** — run the tests and exercise the feature, then report what you observed.
 - Update documentation in the same pull request as the code.
 

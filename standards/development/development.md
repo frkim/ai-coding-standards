@@ -58,6 +58,30 @@ CI runs all three on every pull request and they must pass before merge.
 
 ## 7. Git hygiene
 
-- Commit lock files; never commit build output, `node_modules`, `bin/`, `obj/`, `.venv/`, or secrets.
+- Commit lock files; never commit build output, `node_modules`, `bin/`, `obj/`, `.venv/`, `tmp/`, or secrets.
 - Rebase or merge `main` before requesting review so the pull request is conflict free.
 - One reviewer-sized pull request beats one giant one.
+
+## 8. Adding a dependency
+
+1. Research the library, SDK, or runtime online before adding it — check the official site or registry for the
+   **current stable version** and integrate that version, not a remembered or superseded one. The same applies to
+   Azure services and SDKs such as **Microsoft Foundry**: use the latest generally available version.
+2. Check for known vulnerabilities and an acceptable licence.
+3. Confirm no existing dependency already covers the concern.
+4. Pin the version in the lock file and note the choice in the pull request.
+
+Default tools: [Mermaid](https://mermaid.js.org/) for diagrams in documentation, [D3.js](https://d3js.org/) for
+interactive data visualisation, and [Marp](https://marp.app/) for presentations.
+
+## 9. Scratch scripts
+
+Scripts created only to implement, troubleshoot, or investigate — including those written by AI agents — live in
+a temporary, git-ignored folder rather than the repository tree:
+
+```text
+tmp/scripts/     throwaway implementation, diagnostic, and one-off migration scripts
+```
+
+Add `tmp/` to `.gitignore`. Move a script to a documented `scripts/` folder only when it becomes part of the
+supported workflow.

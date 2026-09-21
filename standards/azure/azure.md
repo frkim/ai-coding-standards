@@ -53,6 +53,9 @@ Required tags on every resource: `env`, `workload`, `owner`, `costCenter`, `data
 
 ## 7. Cost
 
+- **Start with the smallest SKU that meets the requirement** (for example Container Apps consumption, App Service
+  B1/S1, Azure SQL serverless General Purpose, Standard Blob Storage) and scale up only when a measured limit —
+  latency, throughput, quota, or a required feature — forces it. Record the reason in the pull request or an ADR.
 - Autoscale rules with sensible minimums; scale to zero in non-production.
 - Budgets with alerts at 50/80/100%; reserved capacity for steady production workloads.
 - Review the top five cost drivers monthly.
