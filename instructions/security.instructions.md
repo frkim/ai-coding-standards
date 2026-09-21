@@ -41,7 +41,8 @@ Security is a blocking requirement, not a follow-up task.
 - Pull Python and .NET packages from Microsoft-protected feeds
   (`packagefeedproxy.microsoft.io`) — see [`package-feeds.md`](../standards/development/package-feeds.md).
 - Enable Dependabot, secret scanning with push protection, and CodeQL on every repository.
-- Pin GitHub Actions to a commit SHA and grant workflows the minimum `permissions`.
+- Pin GitHub Actions to a commit SHA and grant workflows the minimum `permissions`. Keep actions on a major
+  version that runs on the **Node 24** runtime (`runs.using: node24`); Node 20 is deprecated on the runners.
 
 ## Headers and defaults
 
