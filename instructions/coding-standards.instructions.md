@@ -67,6 +67,34 @@ Microsoft-protected feeds instead of the public endpoints:
 See [`package-feeds.md`](../standards/development/package-feeds.md) for ready-to-copy `pip.conf` and `NuGet.config`
 snippets. Always check a new dependency for known vulnerabilities and an acceptable licence before adding it.
 
+**Before adding a new library, SDK, runtime, or service, research it online first** and integrate the latest
+stable version rather than the version you remember:
+
+- Check the official release notes / registry page for the current stable version, then pin it in the lock file.
+- Prefer the latest generally available SDK and API version — for example, use the latest **Microsoft Foundry**
+  SDK and model/API versions rather than a superseded preview or an older release.
+- Note the release you picked (and why, if it is not the latest) in the pull request description.
+
+## Tooling defaults
+
+| Need | Default tool |
+| --- | --- |
+| Diagrams in documentation | [Mermaid](https://mermaid.js.org/) in `mermaid` fenced code blocks |
+| Interactive / data-driven visualisation | [D3.js](https://d3js.org/) |
+| Slide decks and presentations | [Marp](https://marp.app/) Markdown |
+
+## Scratch scripts
+
+Scripts written only to implement, troubleshoot, or explore — not part of the shipped product — go in a
+temporary, git-ignored folder at the repository root:
+
+```text
+tmp/scripts/      throwaway implementation, diagnostic, and migration helper scripts
+```
+
+Add `tmp/` to `.gitignore`. Promote a script to `scripts/` (documented and reviewed) only when the team needs to
+run it again; otherwise let it stay disposable.
+
 ## Definition of done
 
 - [ ] Code builds and lints clean.

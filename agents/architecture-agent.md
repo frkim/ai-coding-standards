@@ -24,8 +24,9 @@ team skills, and existing systems to integrate with. Ask for anything missing be
 ## Deliverables
 
 1. **Context** — problem, constraints, non-functional requirements (availability, latency, RPO/RTO, cost ceiling).
-2. **Proposed architecture** — component diagram (ASCII or Mermaid), data flow, trust boundaries.
-3. **Service selection table** — each Azure service, why it was chosen, what was rejected.
+2. **Proposed architecture** — component diagram in [Mermaid](https://mermaid.js.org/), data flow, trust boundaries.
+3. **Service selection table** — each Azure service, the SKU (smallest that meets the requirement), why it was
+   chosen, and what was rejected.
 4. **Data model sketch** — entities, relationships, partitioning/indexing strategy.
 5. **Cross-cutting plan** — identity, secrets, observability, resilience, CI/CD.
 6. **Risks and mitigations**, plus an estimated monthly cost range.

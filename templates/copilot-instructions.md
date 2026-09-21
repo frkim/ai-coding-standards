@@ -30,6 +30,12 @@
 - Layer as presentation → service → domain → infrastructure; dependencies point inwards.
 - Validate input at the boundary; parameterised queries only.
 - Structured logging with a correlation id; never log secrets or personal data.
+- Before adding a library, SDK, or runtime, research its **current stable version** online and use that version
+  (for example the latest Microsoft Foundry SDK and API version).
+- Prefer the **smallest Azure SKU** that meets the requirement; scale up only when a measured limit forces it.
+- Write diagrams as [Mermaid](https://mermaid.js.org/), interactive data visualisations with
+  [D3.js](https://d3js.org/), and presentations as [Marp](https://marp.app/) Markdown.
+- Put throwaway implementation or troubleshooting scripts in the git-ignored `tmp/scripts/` folder.
 
 ## Security rules
 

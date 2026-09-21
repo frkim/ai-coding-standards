@@ -82,8 +82,12 @@ resource kvRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
 
 ## Cost and resilience
 
+- **Pick the smallest SKU that meets the requirement** (consumption/serverless tiers first) and only move up when
+  a measured limit or a required feature demands it; document the reason.
 - Right-size SKUs, enable autoscale, and set budgets with alerts.
 - Choose zone-redundant SKUs for production; document the RPO/RTO in an ADR.
+- Check the current documentation for the latest generally available SDK, API, and resource-provider versions
+  before you add an Azure service — for example the latest **Microsoft Foundry** SDK and API version.
 
 ## Checklist
 

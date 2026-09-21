@@ -28,6 +28,23 @@ description: "Documentation standards for READMEs, ADRs, API docs, and code comm
 - Document for each endpoint: purpose, auth requirement, parameters, request/response schemas, error codes, and an example.
 - Version the API in the path (`/api/v1`) and document breaking changes in a changelog.
 
+## Diagrams and presentations
+
+- **Diagrams**: write them as [Mermaid](https://mermaid.js.org/) in a `mermaid` fenced code block so they live in
+  the document, diff in review, and render on GitHub. Do not commit binary diagram exports as the source of truth.
+
+````markdown
+```mermaid
+flowchart LR
+    Browser --> API --> Database[(Azure SQL)]
+```
+````
+
+- **Interactive or data-driven visualisation** (dashboards, charts bound to live data): use
+  [D3.js](https://d3js.org/) rather than a static image.
+- **Presentations**: author slide decks as Markdown with [Marp](https://marp.app/), stored next to the docs they
+  support (for example `docs/presentations/`), and export to HTML or PDF from CI or a documented command.
+
 ## Architecture Decision Records
 
 ```markdown

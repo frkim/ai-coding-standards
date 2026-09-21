@@ -52,6 +52,14 @@ These defaults apply unless a project documents a reasoned exception in an ADR.
 - **Testing**: when you implement a feature, test it — write the tests, run them, and exercise the feature.
 - **Packages**: install Python and .NET dependencies from the Microsoft-protected feeds, not public PyPI/NuGet —
   see [`standards/development/package-feeds.md`](standards/development/package-feeds.md).
+- **New dependencies**: research the library, SDK, or runtime online first and integrate the **latest stable
+  version** (for example the latest Microsoft Foundry SDK and API version).
+- **Cost**: choose the smallest Azure SKU that meets the requirement and scale up only when a measured limit
+  forces it.
+- **Diagrams and decks**: [Mermaid](https://mermaid.js.org/) for diagrams in documentation,
+  [D3.js](https://d3js.org/) for interactive data visualisation, [Marp](https://marp.app/) for presentations.
+- **Scratch scripts**: throwaway implementation or troubleshooting scripts go in a git-ignored `tmp/scripts/`
+  folder, never in the shipped tree.
 
 ## Contributing
 
