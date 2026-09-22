@@ -52,6 +52,40 @@ concurrency:
   cancel-in-progress: true
 ```
 
+### 5.1 Node 24 runtime
+
+Node.js 20 is deprecated on the runners: actions that target it are force-run on Node 24 and will eventually
+fail. See the
+[deprecation changelog](https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/).
+
+- Use action versions that run on **Node 24** — the pinned commit's `action.yml` must declare `runs.using: node24`.
+  Older majors of `actions/checkout`, `actions/setup-node`, `actions/upload-artifact`, `actions/download-artifact`
+  and `actions/cache` still target Node 20: upgrade to the latest major and re-pin the SHA.
+- Write custom JavaScript actions against `node24` and build them with the matching Node version.
+- With `actions/setup-node`, pin `node-version` to `24` (or the version in `.nvmrc` / `package.json` `engines`)
+  so the workflow runtime matches the application runtime.
+- Dependabot with a `github-actions` ecosystem entry keeps the pinned SHAs and majors current.
+
+```yaml
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      # pin to the SHA; the comment records the major version
+      - uses: actions/checkout@<sha> # v5 or later — runs.using: node24
+      - uses: actions/setup-node@<sha> # v5 or later — runs.using: node24
+        with:
+          node-version: '24'
+          cache: npm
+```
+
+```yaml
+# action.yml of a custom JavaScript action
+runs:
+  using: node24
+  main: dist/index.js
+```
+
 ## 6. Security features
 
 Enable on every repository: Dependabot alerts and security updates, secret scanning with push protection,

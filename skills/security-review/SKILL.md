@@ -41,6 +41,7 @@ Report only findings you can justify from the code; each finding gets a severity
 ### Dependencies and CI
 - Unpinned or vulnerable dependencies; public PyPI/NuGet endpoints instead of `packagefeedproxy.microsoft.io`.
 - Unpinned GitHub Actions, `pull_request_target` with checkout of untrusted code, excessive workflow `permissions`.
+- Actions or custom actions still on the deprecated Node 20 runtime (`runs.using: node20`) instead of `node24`.
 
 ### Configuration
 - Debug mode, verbose errors, or permissive CORS in production settings.
