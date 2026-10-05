@@ -73,6 +73,9 @@ stable version rather than the version you remember:
 - Check the official release notes / registry page for the current stable version, then pin it in the lock file.
 - Prefer the latest generally available SDK and API version — for example, use the latest **Microsoft Foundry**
   SDK and model/API versions rather than a superseded preview or an older release.
+- Always target **Microsoft Foundry (new)**, never Foundry (classic): `azure-ai-projects` 2.x and the `openai`
+  package on the Responses API — not `azure-ai-projects` 1.x, `azure-ai-inference`, `AzureOpenAI()` with an
+  `api-version`, or the Assistants API. See `standards/azure/azure.md` §8.
 - Note the release you picked (and why, if it is not the latest) in the pull request description.
 
 ## Tooling defaults

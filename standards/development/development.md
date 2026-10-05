@@ -66,7 +66,8 @@ CI runs all three on every pull request and they must pass before merge.
 
 1. Research the library, SDK, or runtime online before adding it — check the official site or registry for the
    **current stable version** and integrate that version, not a remembered or superseded one. The same applies to
-   Azure services and SDKs such as **Microsoft Foundry**: use the latest generally available version.
+   Azure services and SDKs such as **Microsoft Foundry**: use the latest generally available version, and always
+   **Microsoft Foundry (new)**, never Foundry (classic) — see [`azure/azure.md` §8](../azure/azure.md#8-ai-workloads-microsoft-foundry-new).
 2. Check for known vulnerabilities and an acceptable licence.
 3. Confirm no existing dependency already covers the concern.
 4. Pin the version in the lock file and note the choice in the pull request.

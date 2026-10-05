@@ -1,6 +1,6 @@
 ---
 name: azure
-description: Design, build, and deploy workloads on Azure using managed identities, Bicep infrastructure as code, and least-privilege RBAC. Use when the task involves Azure hosting, Azure SDKs, authentication to Azure services, or deployment.
+description: Design, build, and deploy workloads on Azure using managed identities, Bicep infrastructure as code, and least-privilege RBAC. Use when the task involves Azure hosting, Azure SDKs, Microsoft Foundry models or agents, authentication to Azure services, or deployment.
 ---
 
 # Azure skill
@@ -19,6 +19,7 @@ Azure is the default hosting target. Prefer managed, serverless-leaning services
 | Files/blobs | Azure Blob Storage | — |
 | Messaging | Azure Service Bus | High-throughput telemetry → Event Hubs |
 | Observability | Application Insights + Log Analytics | — |
+| AI models and agents | **Microsoft Foundry (new)** — Foundry resource + Foundry project | Never Foundry (classic), hub-based projects, or a standalone Azure OpenAI resource |
 
 ## Managed identity first
 
@@ -74,6 +75,65 @@ resource kvRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
 }
 ```
 
+## Microsoft Foundry (new), never classic
+
+Build every AI workload on **Microsoft Foundry (new)**. The full rules and the classic-to-new mapping live in
+[`standards/azure/azure.md` §8](../../standards/azure/azure.md#8-ai-workloads-microsoft-foundry-new).
+
+- Provision a **Foundry resource** (`Microsoft.CognitiveServices/accounts`, kind `AIServices`) with child
+  **Foundry projects** — not a hub-based project or a standalone Azure OpenAI resource.
+- Use the **Foundry SDK 2.x** (`azure-ai-projects` 2.x) and the `openai` package on the **Responses API**. Do not use
+  `azure-ai-projects` 1.x, `azure-ai-inference`, `AzureOpenAI()` with an `api-version`, or the Assistants API
+  (`create_agent()`, threads, runs).
+- Read only the Foundry (new) docs at `learn.microsoft.com/azure/foundry`; skip pages marked
+  "Applies only to Foundry (classic) portal".
+- Authenticate with `DefaultAzureCredential`, disable local (key) auth, and grant the **Foundry User** role.
+
+```python
+# Python — Foundry (new): project endpoint, agent version, Responses API
+from azure.ai.projects import AIProjectClient
+from azure.ai.projects.models import PromptAgentDefinition
+from azure.identity import DefaultAzureCredential
+
+# https://<resource>.services.ai.azure.com/api/projects/<project>
+project = AIProjectClient(endpoint=settings.foundry_project_endpoint, credential=DefaultAzureCredential())
+
+agent = project.agents.create_version(
+    agent_name="orders-assistant",
+    definition=PromptAgentDefinition(model=settings.model_deployment, instructions="Answer order questions."),
+)
+
+openai = project.get_openai_client(agent_name=agent.name)
+conversation = openai.conversations.create()
+response = openai.responses.create(conversation=conversation.id, input="Where is order 42?")
+```
+
+```bicep
+resource foundry 'Microsoft.CognitiveServices/accounts@2025-06-01' = {
+  name: 'aif-${workload}-${env}'
+  location: location
+  kind: 'AIServices'
+  sku: { name: 'S0' }
+  identity: { type: 'SystemAssigned' }
+  properties: {
+    allowProjectManagement: true
+    customSubDomainName: 'aif-${workload}-${env}'
+    disableLocalAuth: true
+  }
+}
+
+resource project 'Microsoft.CognitiveServices/accounts/projects@2025-06-01' = {
+  parent: foundry
+  name: 'proj-${workload}-${env}'
+  location: location
+  identity: { type: 'SystemAssigned' }
+  properties: {}
+}
+```
+
+Check the Responses API region availability before choosing `location`, and confirm the latest GA API version of
+`Microsoft.CognitiveServices` before you deploy.
+
 ## Networking and hardening
 
 - Disable public network access on data stores; use private endpoints where the tier supports it.
@@ -96,3 +156,4 @@ resource kvRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
 - [ ] Bicep in `infra/`, parameterised and tagged.
 - [ ] Diagnostics and Application Insights wired up.
 - [ ] Health probes configured; autoscale rules set.
+- [ ] AI workloads use Microsoft Foundry (new): Foundry resource + project, SDK 2.x, Responses API — nothing classic.
