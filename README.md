@@ -48,6 +48,9 @@ These defaults apply unless a project documents a reasoned exception in an ADR.
   across the relevant columns (server-side for large data sets).
 - **Backend**: Python (FastAPI) or C# (ASP.NET Core), layered, paginated, versioned APIs.
 - **Cloud**: Azure as the primary hosting platform, with Bicep infrastructure as code.
+- **AI platform**: always **Microsoft Foundry (new)** — Foundry resource and projects, Foundry SDK 2.x, and the
+  Responses API. Never Foundry (classic), hub-based projects, or the Assistants API — see
+  [`standards/azure/azure.md` §8](standards/azure/azure.md#8-ai-workloads-microsoft-foundry-new).
 - **Identity**: **managed identities wherever possible** — no keys, no connection strings with secrets.
 - **Testing**: when you implement a feature, test it — write the tests, run them, and exercise the feature.
 - **Packages**: install Python and .NET dependencies from the Microsoft-protected feeds, not public PyPI/NuGet —

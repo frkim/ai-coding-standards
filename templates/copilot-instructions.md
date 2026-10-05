@@ -32,6 +32,8 @@
 - Structured logging with a correlation id; never log secrets or personal data.
 - Before adding a library, SDK, or runtime, research its **current stable version** online and use that version
   (for example the latest Microsoft Foundry SDK and API version).
+- For AI workloads, always use **Microsoft Foundry (new)** (Foundry resource and projects, Foundry SDK 2.x,
+  Responses API) — never Foundry (classic), hub-based projects, or the Assistants API.
 - Prefer the **smallest Azure SKU** that meets the requirement; scale up only when a measured limit forces it.
 - Write diagrams as [Mermaid](https://mermaid.js.org/), interactive data visualisations with
   [D3.js](https://d3js.org/), and presentations as [Marp](https://marp.app/) Markdown.
