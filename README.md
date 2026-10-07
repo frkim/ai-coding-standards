@@ -48,6 +48,9 @@ These defaults apply unless a project documents a reasoned exception in an ADR.
   across the relevant columns (server-side for large data sets).
 - **Backend**: Python (FastAPI) or C# (ASP.NET Core), layered, paginated, versioned APIs.
 - **Cloud**: Azure as the primary hosting platform, with Bicep infrastructure as code.
+- **Runtimes**: supported LTS releases — **Node.js 24 LTS** and **.NET 10 LTS**; CI is secure and deterministic
+  (least-privilege `permissions`, `concurrency`, lock-file installs, Bicep lint/validate/what-if) — see
+  [`standards/github/github.md` §5](standards/github/github.md#5-actions).
 - **AI platform**: always **Microsoft Foundry (new)** — Foundry resource and projects, Foundry SDK 2.x, and the
   Responses API. Never Foundry (classic), hub-based projects, or the Assistants API — see
   [`standards/azure/azure.md` §8](standards/azure/azure.md#8-ai-workloads-microsoft-foundry-new).
