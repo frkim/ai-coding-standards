@@ -15,7 +15,7 @@
 ## Setup
 
 ```bash
-# prerequisites: <Node.js LTS | Python 3.x | .NET SDK x>, Azure CLI
+# prerequisites: <Node.js 24 LTS | Python 3.x | .NET 10 LTS SDK>, Azure CLI
 <install command>
 ```
 

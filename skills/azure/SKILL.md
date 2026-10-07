@@ -54,6 +54,9 @@ Common role assignments: `Key Vault Secrets User`, `Storage Blob Data Contributo
 ## Infrastructure as code
 
 - Author infrastructure in **Bicep** under `infra/`, deploy with `az deployment group create` or `azd up`.
+- Validate in CI with `az bicep lint` and `az bicep build`, then `az deployment group validate` and `what-if` when an
+  Azure environment is available — see
+  [`standards/github/github.md` §5.3](../../standards/github/github.md#53-bicep-validation).
 - Parameterise per environment (`dev`, `test`, `prod`); no hardcoded names, regions, or SKUs.
 - Tag every resource: `env`, `owner`, `costCenter`, `workload`.
 - Enable diagnostic settings to Log Analytics on every resource.
@@ -153,7 +156,7 @@ Check the Responses API region availability before choosing `location`, and conf
 
 - [ ] Managed identity used for every supported service-to-service call.
 - [ ] No keys or connection strings with secrets in configuration.
-- [ ] Bicep in `infra/`, parameterised and tagged.
+- [ ] Bicep in `infra/`, parameterised and tagged; CI lints, builds, validates, and runs `what-if`.
 - [ ] Diagnostics and Application Insights wired up.
 - [ ] Health probes configured; autoscale rules set.
 - [ ] AI workloads use Microsoft Foundry (new): Foundry resource + project, SDK 2.x, Responses API — nothing classic.

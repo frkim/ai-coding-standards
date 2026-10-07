@@ -7,10 +7,14 @@ Day-to-day engineering workflow. Language rules live in
 
 | Stack | Toolchain |
 | --- | --- |
-| Next.js / Vue.js | Node.js LTS, npm or pnpm, TypeScript, ESLint, Prettier, Vitest, Playwright |
+| Next.js / Vue.js | Node.js 24 LTS, npm or pnpm, TypeScript, ESLint, Prettier, Vitest, Playwright |
 | Python | Latest supported Python, `uv` or `poetry`, `ruff`, `mypy`, `pytest` |
-| C# | Current .NET LTS SDK, `dotnet format`, xUnit |
+| C# | .NET 10 LTS SDK (pinned in `global.json`), `dotnet format`, xUnit |
 | Azure | Azure CLI, Bicep CLI, optionally Azure Developer CLI (`azd`) |
+
+Prefer supported **LTS** runtimes over the newest "Current" release. If a project cannot move to the baseline
+(for example it is still on .NET 8), document the required runtime explicitly in `global.json` / `.nvmrc`, the
+README, and an ADR, and use the same version in CI.
 
 Use a dev container where possible so the toolchain is reproducible.
 Configure package feeds as described in [`package-feeds.md`](package-feeds.md) before the first restore.
@@ -34,7 +38,8 @@ Every repository exposes the same three commands (script names may differ per st
 <test>    # pytest | npm test | dotnet test
 ```
 
-CI runs all three on every pull request and they must pass before merge.
+CI runs all three on every pull request and they must pass before merge — start from the reference workflow in
+[`github/github.md` §5.2](../github/github.md#52-reference-ci-workflow).
 
 ## 4. Configuration
 

@@ -36,6 +36,9 @@ Required tags on every resource: `env`, `workload`, `owner`, `costCenter`, `data
 
 - All infrastructure in **Bicep** under `infra/`, deployed through CI with OIDC. No portal changes in `prod`.
 - Parameter files per environment; `what-if` runs on pull requests, deployment gated on approval for production.
+- Validate beyond `az bicep build`: Bicep lint (with a committed `bicepconfig.json`), ARM deployment validation
+  (`az deployment group validate`), and `what-if` when an Azure environment is available — see
+  [`github.md` §5.3](../github/github.md#53-bicep-validation).
 - Store deployment state and outputs in the pipeline, never in the repository.
 
 ## 5. Observability
