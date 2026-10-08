@@ -21,8 +21,8 @@ app, the GitHub Copilot CLI, and the Copilot coding agent.
 ├── instructions/     security · coding-standards · testing · documentation · architecture
 ├── skills/           azure · api-development · testing · security-review · code-review
 ├── agents/           architecture · security · code-review · documentation
-├── prompts/          create-api · create-tests · review-code
-├── standards/        security/ · azure/ · github/ · development/
+├── prompts/          create-api · create-tests · review-code · check-compliance
+├── standards/        security/ · azure/ · github/ · development/ · compliance/
 └── templates/        AGENTS.md · copilot-instructions.md · skill-template/
 ```
 
@@ -37,6 +37,9 @@ app, the GitHub Copilot CLI, and the Copilot coding agent.
    (or your agent's skills directory). Start a new one from [`templates/skill-template/`](templates/skill-template/).
 4. **Add the prompts.** Copy [`prompts/`](prompts/) files to `.github/prompts/` and invoke them with `/` in chat.
 5. **Link the standards** from your README so humans and agents read the same rules.
+6. **Audit an existing project** with the
+   [compliance checklist](standards/compliance/compliance-checklist.md) — by hand, or by running
+   [`/check-compliance`](prompts/check-compliance.prompt.md) in agent mode.
 
 ## Engineering baseline
 
