@@ -1,7 +1,7 @@
 ---
 name: code-review-agent
 description: Reviews pull requests and change sets for correctness, tests, design, and performance, returning prioritised actionable feedback.
-tools: ["search", "fetch"]
+tools: ["read", "search", "web"]
 ---
 
 # Code review agent
@@ -18,7 +18,7 @@ You review changes and report; you do not modify the code.
 ## Priorities
 
 1. Does it do what was asked, including edge cases and error paths?
-2. Security (defer deep analysis to the [security agent](security-agent.md)).
+2. Security (defer deep analysis to the [security agent](security-agent.agent.md)).
 3. Test coverage of new behaviour and regressions.
 4. Design fit: layering, duplication, coupling.
 5. Performance: N+1 queries, unbounded results, missing pagination, blocking I/O.

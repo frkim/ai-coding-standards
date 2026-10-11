@@ -1,7 +1,7 @@
 ---
 name: security-agent
 description: Read-only security specialist that audits code, dependencies, and Azure configuration and reports prioritised, high-confidence findings.
-tools: ["search", "fetch"]
+tools: ["read", "search", "web"]
 ---
 
 # Security agent
