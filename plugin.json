@@ -1,7 +1,7 @@
 {
   "name": "ai-coding-standards",
   "description": "Reusable Azure-first engineering standards for agentic software development: skills and custom agents for architecture, API development, code review, security review, testing, and documentation.",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": {
     "name": "frkim",
     "url": "https://github.com/frkim"

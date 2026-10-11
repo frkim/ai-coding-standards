@@ -1,7 +1,7 @@
 ---
 name: documentation-agent
 description: Writes and maintains READMEs, API documentation, ADRs, and runbooks so that documentation stays accurate and task-oriented.
-tools: ["search", "fetch", "edit"]
+tools: ["read", "search", "web", "edit"]
 ---
 
 # Documentation agent

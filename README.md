@@ -16,6 +16,7 @@ app, the GitHub Copilot CLI, and the Copilot coding agent.
 | [`prompts/`](prompts/) | Reusable `*.prompt.md` task prompts | `/` prompt files in Copilot Chat |
 | [`standards/`](standards/) | Normative engineering standards | Humans and agents |
 | [`templates/`](templates/) | Starting points to copy into a repository | New repositories |
+| [`docs/`](docs/copilot-app-plugin.md) | How to install and use the plugin in the Copilot app | Humans |
 | [`plugin.json`](plugin.json) | Copilot plugin manifest that ships `skills/` and `agents/` | Copilot app, CLI, and cloud agent |
 | [`.github/plugin/`](.github/plugin/marketplace.json) | `marketplace.json` that lists the plugin | Copilot plugin marketplaces |
 
@@ -53,6 +54,9 @@ Copilot does not activate them: a plugin carries agents, skills, hooks, and MCP/
    `frkim/ai-coding-standards`.
 3. Select the `ai-coding-standards` marketplace, find the `ai-coding-standards` plugin, and click **Install**.
 4. Choose one of the plugin's agents with the agent picker or `/agent`; its skills load automatically when relevant.
+
+See the [Copilot app guide](docs/copilot-app-plugin.md) for verification, example prompts, updating, team rollout,
+and troubleshooting.
 
 ### GitHub Copilot CLI
 
@@ -136,7 +140,8 @@ Keep every document short, normative, and actionable. Prefer a checklist over pr
 actually been run, and update the related standard when you change an instruction or skill.
 
 The plugin reads `skills/` and `agents/` straight from this repository, so a new skill folder or agent file needs no
-manifest change. Bump `version` in [`plugin.json`](plugin.json) and in the plugin entry of
+manifest change. Name agent files `<name>.agent.md` and use only valid tool aliases (`read`, `search`, `edit`,
+`execute`, `web`, `agent`). Bump `version` in [`plugin.json`](plugin.json) and in the plugin entry of
 [`.github/plugin/marketplace.json`](.github/plugin/marketplace.json) — keep the two identical — when you change a
 skill or agent, so plugin users can update.
 

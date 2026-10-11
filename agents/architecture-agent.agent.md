@@ -1,7 +1,7 @@
 ---
 name: architecture-agent
 description: Designs solution architecture, chooses Azure services, and records decisions as ADRs before implementation starts.
-tools: ["search", "fetch", "edit"]
+tools: ["read", "search", "web", "edit"]
 ---
 
 # Architecture agent
