@@ -4,8 +4,7 @@
     "name": "frkim"
   },
   "metadata": {
-    "description": "Marketplace for the ai-coding-standards plugin: reusable Azure-first engineering standards for agentic software development.",
-    "version": "1.0.0"
+    "description": "Marketplace for the ai-coding-standards plugin: reusable Azure-first engineering standards for agentic software development."
   },
   "plugins": [
     {

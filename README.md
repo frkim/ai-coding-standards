@@ -58,14 +58,14 @@ Copilot does not activate them: a plugin carries agents, skills, hooks, and MCP/
 
 ```shell
 copilot plugin marketplace add frkim/ai-coding-standards
-copilot plugin install ai-coding-standards@ai-coding-standards   # PLUGIN@MARKETPLACE
+copilot plugin install ai-coding-standards@ai-coding-standards
 copilot plugin list
 ```
 
-In an interactive session use `/plugin marketplace add` and `/plugin install` instead, and pick an agent with `/agent`.
-Update with `copilot plugin update ai-coding-standards` and remove with `copilot plugin uninstall ai-coding-standards`.
-From the shell, plugin agents are prefixed with the plugin name:
-`copilot --agent ai-coding-standards:code-review-agent`.
+The install spec is `PLUGIN@MARKETPLACE`; here both are named `ai-coding-standards`. In an interactive session use
+`/plugin marketplace add` and `/plugin install` instead, and pick an agent with `/agent`. Update with
+`copilot plugin update ai-coding-standards` and remove with `copilot plugin uninstall ai-coding-standards`. From the
+shell, plugin agents are prefixed with the plugin name: `copilot --agent ai-coding-standards:code-review-agent`.
 
 ### Copilot cloud agent and shared repositories
 
@@ -136,7 +136,7 @@ Keep every document short, normative, and actionable. Prefer a checklist over pr
 actually been run, and update the related standard when you change an instruction or skill.
 
 The plugin reads `skills/` and `agents/` straight from this repository, so a new skill folder or agent file needs no
-manifest change. Bump `version` in [`plugin.json`](plugin.json) and
+manifest change. Bump `version` in [`plugin.json`](plugin.json) and in the plugin entry of
 [`.github/plugin/marketplace.json`](.github/plugin/marketplace.json) — keep the two identical — when you change a
 skill or agent, so plugin users can update.
 
