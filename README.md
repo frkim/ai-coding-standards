@@ -8,7 +8,7 @@ app, the GitHub Copilot CLI, and the Copilot coding agent.
 
 ## Contents
 
-| Folder | What it holds | Consumed by |
+| Path | What it holds | Consumed by |
 | --- | --- | --- |
 | [`instructions/`](instructions/) | `*.instructions.md` rules applied to matching files | Copilot custom instructions |
 | [`skills/`](skills/) | `SKILL.md` capability packs loaded on demand | Agent skills |
@@ -16,6 +16,8 @@ app, the GitHub Copilot CLI, and the Copilot coding agent.
 | [`prompts/`](prompts/) | Reusable `*.prompt.md` task prompts | `/` prompt files in Copilot Chat |
 | [`standards/`](standards/) | Normative engineering standards | Humans and agents |
 | [`templates/`](templates/) | Starting points to copy into a repository | New repositories |
+| [`plugin.json`](plugin.json) | Copilot plugin manifest that ships `skills/` and `agents/` | Copilot app, CLI, and cloud agent |
+| [`.github/plugin/`](.github/plugin/marketplace.json) | `marketplace.json` that lists the plugin | Copilot plugin marketplaces |
 
 ```text
 ├── instructions/     security · coding-standards · testing · documentation · architecture
@@ -23,7 +25,64 @@ app, the GitHub Copilot CLI, and the Copilot coding agent.
 ├── agents/           architecture · security · code-review · documentation
 ├── prompts/          create-api · create-tests · review-code · check-compliance
 ├── standards/        security/ · azure/ · github/ · development/ · compliance/
-└── templates/        AGENTS.md · copilot-instructions.md · skill-template/
+├── templates/        AGENTS.md · copilot-instructions.md · skill-template/
+├── plugin.json       Copilot plugin manifest (ships skills/ and agents/)
+└── .github/plugin/   marketplace.json (plugin marketplace catalog)
+```
+
+## Install as a GitHub Copilot plugin
+
+This repository is a [GitHub Copilot plugin](https://docs.github.com/en/copilot/concepts/agents/about-plugins) named
+`ai-coding-standards` and also hosts the marketplace that lists it. Install it once and the skills and agents are
+available in every project, without copying files.
+
+| Shipped by the plugin | Source | You get |
+| --- | --- | --- |
+| 5 skills | [`skills/`](skills/) | `api-development`, `azure`, `code-review`, `security-review`, `testing` |
+| 4 custom agents | [`agents/`](agents/) | `architecture-agent`, `code-review-agent`, `documentation-agent`, `security-agent` |
+
+[`instructions/`](instructions/), [`prompts/`](prompts/), and [`templates/`](templates/) are copied with the plugin but
+Copilot does not activate them: a plugin carries agents, skills, hooks, and MCP/LSP servers, not `*.instructions.md` or
+`*.prompt.md` files. Copy what you need as described in
+[How to use it in your repository](#how-to-use-it-in-your-repository).
+
+### GitHub Copilot app
+
+1. Click **Customize** in the app sidebar, then click **Plugins**.
+2. Click the gear icon next to the marketplace dropdown and follow the prompts to add the GitHub repository
+   `frkim/ai-coding-standards`.
+3. Select the `ai-coding-standards` marketplace, find the `ai-coding-standards` plugin, and click **Install**.
+4. Choose one of the plugin's agents with the agent picker or `/agent`; its skills load automatically when relevant.
+
+### GitHub Copilot CLI
+
+```shell
+copilot plugin marketplace add frkim/ai-coding-standards
+copilot plugin install ai-coding-standards@ai-coding-standards
+copilot plugin list
+```
+
+The install spec is `PLUGIN@MARKETPLACE`; here both are named `ai-coding-standards`. In an interactive session use
+`/plugin marketplace add` and `/plugin install` instead, and pick an agent with `/agent`. Update with
+`copilot plugin update ai-coding-standards` and remove with `copilot plugin uninstall ai-coding-standards`. From the
+shell, plugin agents are prefixed with the plugin name: `copilot --agent ai-coding-standards:code-review-agent`.
+
+### Copilot cloud agent and shared repositories
+
+To enable the plugin for everyone who works in your repository, including Copilot cloud agent and the Copilot CLI,
+commit this to `.github/copilot/settings.json`:
+
+```json
+{
+  "enabledPlugins": {
+    "ai-coding-standards@ai-coding-standards": true
+  },
+  "extraKnownMarketplaces": {
+    "ai-coding-standards": {
+      "source": { "source": "github", "repo": "frkim/ai-coding-standards" }
+    }
+  }
+}
 ```
 
 ## How to use it in your repository
@@ -33,8 +92,9 @@ app, the GitHub Copilot CLI, and the Copilot coding agent.
    and fill in the placeholders.
 2. **Adopt the instructions.** Copy the files you need from [`instructions/`](instructions/) to
    `.github/instructions/`. Each file's `applyTo` front matter controls which files it applies to.
-3. **Add the skills.** Copy the relevant folders from [`skills/`](skills/) to `.github/skills/`
-   (or your agent's skills directory). Start a new one from [`templates/skill-template/`](templates/skill-template/).
+3. **Add the skills.** Install the [plugin](#install-as-a-github-copilot-plugin), or copy the relevant folders from
+   [`skills/`](skills/) to `.github/skills/` (or your agent's skills directory). Start a new one from
+   [`templates/skill-template/`](templates/skill-template/).
 4. **Add the prompts.** Copy [`prompts/`](prompts/) files to `.github/prompts/` and invoke them with `/` in chat.
 5. **Link the standards** from your README so humans and agents read the same rules.
 6. **Audit an existing project** with the
@@ -74,6 +134,11 @@ These defaults apply unless a project documents a reasoned exception in an ADR.
 
 Keep every document short, normative, and actionable. Prefer a checklist over prose, cite a command that has
 actually been run, and update the related standard when you change an instruction or skill.
+
+The plugin reads `skills/` and `agents/` straight from this repository, so a new skill folder or agent file needs no
+manifest change. Bump `version` in [`plugin.json`](plugin.json) and in the plugin entry of
+[`.github/plugin/marketplace.json`](.github/plugin/marketplace.json) — keep the two identical — when you change a
+skill or agent, so plugin users can update.
 
 ## Licence
 

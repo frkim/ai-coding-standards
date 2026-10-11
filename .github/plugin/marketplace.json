@@ -1,0 +1,34 @@
+{
+  "name": "ai-coding-standards",
+  "owner": {
+    "name": "frkim"
+  },
+  "metadata": {
+    "description": "Marketplace for the ai-coding-standards plugin: reusable Azure-first engineering standards for agentic software development."
+  },
+  "plugins": [
+    {
+      "name": "ai-coding-standards",
+      "description": "Reusable Azure-first engineering standards for agentic software development: skills and custom agents for architecture, API development, code review, security review, testing, and documentation.",
+      "version": "1.0.0",
+      "author": {
+        "name": "frkim",
+        "url": "https://github.com/frkim"
+      },
+      "homepage": "https://github.com/frkim/ai-coding-standards",
+      "repository": "https://github.com/frkim/ai-coding-standards",
+      "license": "MIT",
+      "keywords": [
+        "standards",
+        "azure",
+        "architecture",
+        "api",
+        "code-review",
+        "security",
+        "testing",
+        "documentation"
+      ],
+      "source": "./"
+    }
+  ]
+}

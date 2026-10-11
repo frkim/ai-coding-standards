@@ -37,8 +37,8 @@ Sources: [`github.md` §1](../github/github.md#1-repository-setup),
 - [ ] **REPO-03** `AGENTS.md` or `.github/copilot-instructions.md` exists, is based on
       [`templates/`](../../templates/), and has no unfilled `<placeholder>` left. **(blocking)**
 - [ ] **REPO-04** The relevant `*.instructions.md` files are in `.github/instructions/` (or linked from the agent
-      contract) with `applyTo` front matter; skills and prompts in use live in `.github/skills/` and
-      `.github/prompts/`.
+      contract) with `applyTo` front matter; skills in use live in `.github/skills/` (or come from the
+      `ai-coding-standards` Copilot plugin) and prompts in use live in `.github/prompts/`.
 - [ ] **REPO-05** Issue and pull request templates exist in `.github/`.
 - [ ] **REPO-06** The repository has a one-line description and topics.
 - [ ] **REPO-07** `docs/adr/` exists and holds an ADR for each significant decision and each documented exception.
